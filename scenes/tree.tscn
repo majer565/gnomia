@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgvv7i737sfq6"]
+
+[ext_resource type="PackedScene" path="res://scenes/animated_tree.tscn" id="1_pwnox"]
+[ext_resource type="Script" path="res://scripts/tree.gd" id="1_v0pr2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5gki4"]
+radius = 17.0
+height = 54.0
+
+[node name="StaticBody2D" type="StaticBody2D"]
+script = ExtResource("1_v0pr2")
+
+[node name="AnimatedTree" parent="." instance=ExtResource("1_pwnox")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 52)
+shape = SubResource("CapsuleShape2D_5gki4")

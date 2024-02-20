@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://gqpdkt3x6o07"]
+
+[ext_resource type="Texture2D" uid="uid://bkj1p115x3t8i" path="res://art/pack/UI/Buttons/Button_Hover_3Slides.png" id="1_8qpgf"]
+[ext_resource type="Script" path="res://scripts/gameover_menu.gd" id="1_etrih"]
+[ext_resource type="Script" path="res://scripts/Score_amount.gd" id="2_lell6"]
+[ext_resource type="Texture2D" uid="uid://bwovsinnofeqn" path="res://art/pack/UI/Buttons/Button_Disable_3Slides.png" id="2_llknl"]
+[ext_resource type="AudioStream" uid="uid://dnetgq4y1buik" path="res://music/gameover.mp3" id="5_8pmmv"]
+
+[node name="Gameover_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_etrih")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -54.0
+offset_top = -28.0
+offset_right = 1199.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.788235)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 347.0
+offset_right = 439.0
+offset_bottom = 23.0
+scale = Vector2(5, 5)
+text = "GAME OVER"
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 427.0
+offset_top = 116.0
+offset_right = 479.0
+offset_bottom = 139.0
+scale = Vector2(3, 3)
+text = "Score: "
+
+[node name="Score_amount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 605.0
+offset_top = 115.0
+offset_right = 645.0
+offset_bottom = 138.0
+scale = Vector2(3, 3)
+text = "0"
+script = ExtResource("2_lell6")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 233.0
+offset_right = 576.0
+offset_bottom = 297.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("1_8qpgf")
+texture_pressed = ExtResource("2_llknl")
+
+[node name="menu" type="Label" parent="."]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 246.0
+offset_right = 542.0
+offset_bottom = 269.0
+scale = Vector2(3, 3)
+text = "M E N U"
+
+[node name="Gameover" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_8pmmv")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

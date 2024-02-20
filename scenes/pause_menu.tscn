@@ -1,0 +1,159 @@
+[gd_scene load_steps=6 format=3 uid="uid://blxwf1eg0qaqh"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_iosi4"]
+[ext_resource type="Texture2D" uid="uid://bkj1p115x3t8i" path="res://art/pack/UI/Buttons/Button_Hover_3Slides.png" id="1_wmk3p"]
+[ext_resource type="Texture2D" uid="uid://bwovsinnofeqn" path="res://art/pack/UI/Buttons/Button_Disable_3Slides.png" id="2_pv0hp"]
+[ext_resource type="Texture2D" uid="uid://ba0iusdab5u3n" path="res://art/pack/UI/Buttons/Button_Red_3Slides.png" id="4_sq0hr"]
+[ext_resource type="Texture2D" uid="uid://du6f5jslpx1mc" path="res://art/pack/UI/Buttons/Button_Red_3Slides_Pressed.png" id="5_7fg28"]
+
+[node name="Pause_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iosi4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -33.0
+offset_top = -15.0
+offset_right = 1216.0
+offset_bottom = 695.0
+color = Color(0, 0, 0, 0.235294)
+
+[node name="Pause_options" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -100.0
+offset_right = 96.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="TextureButton" parent="Pause_options"]
+layout_mode = 2
+texture_normal = ExtResource("1_wmk3p")
+texture_pressed = ExtResource("2_pv0hp")
+
+[node name="Label" type="Label" parent="Pause_options/Resume"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 13.0
+offset_right = 137.0
+offset_bottom = 36.0
+text = "R E S U M E"
+
+[node name="Settings" type="TextureButton" parent="Pause_options"]
+layout_mode = 2
+texture_normal = ExtResource("1_wmk3p")
+texture_pressed = ExtResource("2_pv0hp")
+
+[node name="Label" type="Label" parent="Pause_options/Settings"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 14.0
+offset_right = 148.0
+offset_bottom = 37.0
+text = "S E T T I N G S"
+
+[node name="Exit" type="TextureButton" parent="Pause_options"]
+layout_mode = 2
+texture_normal = ExtResource("1_wmk3p")
+texture_pressed = ExtResource("2_pv0hp")
+
+[node name="Label" type="Label" parent="Pause_options/Exit"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 13.0
+offset_right = 157.0
+offset_bottom = 36.0
+text = "E X I T"
+
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -30.0
+offset_right = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings_menu" type="HBoxContainer" parent="Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.0
+offset_top = -25.0
+offset_right = 149.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Labels" type="VBoxContainer" parent="Settings/Settings_menu"]
+layout_mode = 2
+
+[node name="Sounds" type="Label" parent="Settings/Settings_menu/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 9.39
+text = "S O U N D S"
+
+[node name="Music" type="Label" parent="Settings/Settings_menu/Labels"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 9.39
+text = "M U S I C"
+
+[node name="Sliders" type="VBoxContainer" parent="Settings/Settings_menu"]
+modulate = Color(0, 0.207843, 1, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="Sounds" type="HSlider" parent="Settings/Settings_menu/Sliders"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="Music" type="HSlider" parent="Settings/Settings_menu/Sliders"]
+layout_mode = 2
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="Back_Button" type="TextureButton" parent="Settings"]
+layout_mode = 0
+offset_left = 489.0
+offset_top = 380.0
+offset_right = 681.0
+offset_bottom = 444.0
+texture_normal = ExtResource("4_sq0hr")
+texture_pressed = ExtResource("5_7fg28")
+
+[node name="Label" type="Label" parent="Settings/Back_Button"]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 14.0
+offset_right = 116.0
+offset_bottom = 37.0
+text = "BACK"
+
+[connection signal="pressed" from="Pause_options/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Pause_options/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Pause_options/Exit" to="." method="_on_exit_pressed"]
+[connection signal="value_changed" from="Settings/Settings_menu/Sliders/Sounds" to="." method="_on_sounds_value_changed"]
+[connection signal="value_changed" from="Settings/Settings_menu/Sliders/Music" to="." method="_on_music_value_changed"]
+[connection signal="pressed" from="Settings/Back_Button" to="." method="_on_back_button_pressed"]

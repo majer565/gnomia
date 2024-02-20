@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://kmg61nxyfsyr"]
+
+[ext_resource type="Texture2D" uid="uid://c1m2babq6c7i6" path="res://art/pack/UI/Ribbons/Ribbon_Red_Connection_Up.png" id="1_ch8wv"]
+[ext_resource type="Texture2D" uid="uid://cqyukocqlytag" path="res://art/pack/Deco/14.png" id="2_d3u5j"]
+[ext_resource type="Script" path="res://scripts/kill_label.gd" id="3_y1bgd"]
+
+[node name="KillCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Banner" type="Sprite2D" parent="."]
+position = Vector2(56.375, 107)
+scale = Vector2(1.73047, 1.27344)
+texture = ExtResource("1_ch8wv")
+
+[node name="Bones" type="Sprite2D" parent="."]
+position = Vector2(39.375, 97)
+texture = ExtResource("2_d3u5j")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 38.375
+offset_top = 94.0
+offset_right = 66.375
+offset_bottom = 117.0
+scale = Vector2(2, 2)
+text = "1"
+script = ExtResource("3_y1bgd")

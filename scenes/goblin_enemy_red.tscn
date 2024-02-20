@@ -1,0 +1,146 @@
+[gd_scene load_steps=18 format=3 uid="uid://csvu7ovm0h6nc"]
+
+[ext_resource type="Texture2D" uid="uid://da043ycbusyjw" path="res://art/pack/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_0t55o"]
+[ext_resource type="Script" path="res://scripts/goblin_enemy_red.gd" id="1_k3u5w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgyxv"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(0, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e2n8d"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(192, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7pb7"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(384, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb7au"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(576, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fhijl"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(768, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8iyx"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(960, 384, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2v1u"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p75yt"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8xdo"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewsux"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ms63"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq26m"]
+atlas = ExtResource("1_0t55o")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k375f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgyxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e2n8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7pb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb7au")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fhijl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8iyx")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2v1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p75yt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8xdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewsux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ms63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq26m")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ws6p6"]
+radius = 24.0208
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_om4og"]
+radius = 37.0
+height = 124.0
+
+[node name="GoblinRed" type="CharacterBody2D"]
+platform_floor_layers = 4294901760
+script = ExtResource("1_k3u5w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_k375f")
+animation = &"attack"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_ws6p6")
+
+[node name="enemy_hitbox" type="Area2D" parent="."]
+
+[node name="HitBoxCollisionShape" type="CollisionShape2D" parent="enemy_hitbox"]
+position = Vector2(0, -8)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_om4og")
+
+[node name="take_damage_cooldown" type="Timer" parent="."]
+wait_time = 0.45
+
+[node name="deal_damage_cooldown" type="Timer" parent="."]
+wait_time = 1.4
+
+[node name="healthbar" type="ProgressBar" parent="."]
+modulate = Color(0.94902, 0, 0, 1)
+offset_left = -56.0
+offset_top = -60.0
+offset_right = 58.0
+offset_bottom = -44.0
+show_percentage = false
+
+[connection signal="body_entered" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_entered"]
+[connection signal="body_exited" from="enemy_hitbox" to="." method="_on_enemy_hitbox_body_exited"]
+[connection signal="timeout" from="take_damage_cooldown" to="." method="_on_take_damage_cooldown_timeout"]
+[connection signal="timeout" from="deal_damage_cooldown" to="." method="_on_deal_damage_cooldown_timeout"]
